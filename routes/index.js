@@ -30,6 +30,12 @@ router.get('/matches/:id', function(req, res) {
 	res.render('matches.html')
 })
 
+router.get('/userlist', function(req, res) {
+	models.User.find(function (err, users) {
+		res.send(users);
+	})
+})
+
 router.get('/user/profile/:id', function(req, res) {
 	var id_string = req.params.id
   models.User.findOne({'_id': id_string}, function(err, user) {

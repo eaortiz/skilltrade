@@ -1,0 +1,22 @@
+.container{
+	margin: 0 auto; 
+	width: 850px;
+
+}
+
+.header {
+
+}
+
+.header ul {
+	list-style-type: none;
+}
+
+.header ul li {
+	float:left;
+	margin-left:15px;
+}
+
+.watermark{
+
+}

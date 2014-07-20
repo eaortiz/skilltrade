@@ -24,7 +24,7 @@
           var tr = document.createElement("tr");
           var td = document.createElement("td");
           td.innerHTML = "<img src='"+matches[i].their_user_photo
-            +"' />" + matches[i].their_user_name + " will teach you " + matches[i].my_want + " in exchange for " + matches[i].their_want + ".  Contact info: " + matches[i].their_user_contact + ".";
+            +"' /><br>You have been matched! <br><br><span class = 'decor'>" + matches[i].their_user_name + " </span> will teach you <span class = 'decor'>" + matches[i].my_want + "</span> in exchange for <span class = 'decor'>" + matches[i].their_want + "</span>.  <br> <br> Contact info: <span class = 'decor'>" + matches[i].their_user_contact + "</span>.";
           tr.appendChild(td);
           list.appendChild(tr);
           /*var tr = document.createElement("tr");

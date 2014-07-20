@@ -14,8 +14,10 @@
       function loadskills(cb) {
         uid = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
         document.getElementById("offers").href = "/offers/" + uid;
+        fakedata = [];
         $.get( "/api/flyers/" + uid, function( data ) {
-          fakedata = data;
+          if (data) fakedata = data;
+          else fakedata = [];
           cb(data);
         });
       }
@@ -32,7 +34,10 @@
         );
         fakedata.unshift(form.want.value);
         populateskilllist(fakedata);
-      } catch (e) {console.log(e)}
+        form.want.value = ""
+      } catch (e) {
+          console.log(e)
+        }
       }
       function populateskilllist(skills) {
         var skilllist = document.getElementById("skilllist");

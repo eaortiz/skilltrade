@@ -11,8 +11,8 @@
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
     <script type="text/javascript">
-      var uid = "53cb9cff0d26d7b5933c6d11";
       function getmatches(cb) {
+        uid = window.location.substring(window.location.lastIndexOf('/') + 1);
         $.get( "/api/matches/" + uid, function( data ) {
           cb(data);
         });

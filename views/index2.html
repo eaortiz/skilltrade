@@ -65,15 +65,20 @@
       </div>
       <div id="content">
         <div id="profile">
-          <img id="picture" />
-          <p id="user_name"></p>
-          <p id="description"></p>
-        </div>
-        <div id="flyer">
-          <p id="subject"></p>
+          <img class = "profile" id="picture" />
+          <div class ="textbox">
+            <span> Hi! I am 
+            <span class = "decor" id="user_name"></span>. 
+            <span> I want to <strong> learn</strong></span>
+            <span class = "decor" id="subject"></span>.
+          </div>
+          <div class = "textbox2">
+            <p >More about me:</p>
+            <span class = "decor" id="description"></span>. 
+          </div>
           <form id="yesno" action="/api/flyer/add-acceptance" method="POST">
-            <input class = "yes" type="button" onclick="offer_submit();" name="yes"><img src = '/images/yes.png'/></input>
-            <input class = "decide" type="button" onclick="render_offer();" name="no"><img src = '/images/no.png'/></input>
+            <img class = "btn" src = '/images/yes.png' onclick="render_offer();"/>
+            <img class = "btn" src = '/images/no.png' onclick="render_offer();"/>
             <input type="hidden" name="id"></input>
             <input type="hidden" name="uid"></input>
         </form>

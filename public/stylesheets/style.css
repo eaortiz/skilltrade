@@ -1,12 +1,73 @@
 body {
-	color:red;
+	font-family: 'MuseoSansRounded';
+	font-size: 28px;
+}
+.decor {
+	color: rgb(0,166,156);
 }
 
 img {
 	height: 80px;
+    border-radius: 50px;
 }
 
-input.yes {
-	background-image url('/images/yes.png');
+.btn {
+	padding: 30px;
+
+}
+
+.profile {
+	clear: left;
+}
+
+.textbox {
+	clear:right;
+	width: 300px;
+}
+
+.textbox2 {
+	width: 300px;
+	padding-bottom: 20px;
+}
+.yes {
+	background: url('/images/yes.png') no-repeat;
 	border: 0px;
+}
+
+.container{
+	margin: 0 auto; 
+	width: 850px;
+	padding: 30px;
+
+}
+
+.containerDiv{
+	padding-top: 14px;
+}
+
+
+
+.header {
+
+}
+
+.header ul {
+	list-style-type: none;
+}
+
+.header ul li {
+	float:right;
+	margin-left:15px;
+}
+
+#menu li {
+	cursor: pointer;
+}
+
+.signin{
+	float: right;
+}
+
+.watermark{
+
 }

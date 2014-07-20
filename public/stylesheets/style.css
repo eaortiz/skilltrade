@@ -11,9 +11,11 @@ img {
     border-radius: 50px;
 }
 
+
 #content {
 	width: 450px;
 	padding: 30px;
+	font-size: 16px;
 }
 
 .btn {

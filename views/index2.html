@@ -12,9 +12,9 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
     <script type="text/javascript">
-      var uid = "53cb9cff0d26d7b5933c6d11";
       var offers = [];
       function load_offers() {
+        uid = window.location.substring(window.location.lastIndexOf('/') + 1);
         $.get( "/api/offers/" + uid, function( data ) {
           offers = data;
           render_offer();

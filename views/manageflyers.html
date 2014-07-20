@@ -11,7 +11,12 @@
     
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script>
-      var fakedata = ["CSS","Objective C", "Java", "Salsa"];
+      function loadskills(cb) {
+        uid = window.location.substring(window.location.lastIndexOf('/') + 1);
+        $.get( "/api/flyers/" + uid, function( data ) {
+          cb(data);
+        });
+      }
       function addflyer() {
         var form = document.getElementById("newflyerform");
         var dataString = 'want='+form.want.value+'&uid='+form.uid.value;
@@ -41,7 +46,7 @@
       }
     </script>
   </head>
-  <body onload="populateskilllist(fakedata);">
+  <body onload="loadskills(populateskilllist);">
     <div class="container">
       <div class="header pure-g">
         <div class="containerDiv watermark pure-u-1-5">Skill-Trade</div>

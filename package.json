@@ -13,10 +13,10 @@
     "express": "^4.2.0",
     "jade": "~1.3.0",
     "mongodb": "^1.4.7",
+    "mongoose": "^3.8.13",
     "morgan": "~1.0.0",
     "static-favicon": "~1.0.0",
-    "stylus": "^0.47.2",
-    "mongoose": "*"
+    "stylus": "^0.47.2"
   },
   "description": "Hello!",
   "main": "app.js",

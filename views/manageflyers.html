@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <link rel="stylesheet" href="style.css">
     
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script>
@@ -38,14 +39,16 @@
     </script>
   </head>
   <body onload="populateskilllist(fakedata);">
-    <div id="container">
-      <div id="header">
-        <div id="watermark"></div>
-        <select id="menu">
-          <option value="flyerfeed">Flyer Feed</option>
-          <option value="newflyer">New Flyer</option>
-          <option value="matches">Matches</option>
-        </select>
+    <div class="container">
+      <div class="header pure-g">
+        <div class="containerDiv watermark pure-u-1-5"></div>
+        <div class="pure-u-4-5">
+          <ul id="menu">
+            <li id="flyerfeed">Flyer Feed</li>
+            <li id="newflyer">New Flyer</li>
+            <li id="matches">Matches</li>
+          </ul>
+      </div>
       </div>
       <div id="content">
         <form method="POST" action="/api/flyer/create/<%=user_id%>" id="newflyerform" onsubmit="addflyer(); return false;">

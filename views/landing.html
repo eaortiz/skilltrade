@@ -14,7 +14,7 @@
   <body>
     <div class="container">
       <div class="header pure-g">
-        <div class="watermark pure-u-1-5"></div>
+        <div class="containerDiv watermark pure-u-1-5">Skill-Trade</div>
         <div class="pure-u-4-5">
           <ul id="menu">
             <li id="flyerfeed">Flyer Feed</li>
@@ -23,8 +23,12 @@
           </ul>
       </div>
       </div>
-      <div id="content">
-        <div id="signin">
+      <div class="content">
+        <div></div>
+        <br>
+        <br>
+        <br>
+        <div class="signin">
           <label>Please Login:</label>
           <form id="signinform" method="POST" action="/api/user/create">
             <input type="text" name="username" placeholder="Username"></input>
@@ -33,6 +37,9 @@
             <input type="submit" value="Login"></input>
           </form>
         </div>
+        <br>
+        <br>
+        <br>
         <div id="signup">
           <label>Sign Up Here:</label>
           <form id="signupform">

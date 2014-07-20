@@ -4,6 +4,10 @@ var models = require('../models')
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema
 var ObjectId = Schema.Types.ObjectId
+//Twilio Stuff
+var ACCOUNT_SID = "AC43217aee93d8775227e4a486a6e6e48f"
+var AUTH_TOKEN = "534ea3245c5eaebe1ed55a4c4cb59965"
+var client = require('twilio')(ACCOUNT_SID, AUTH_TOKEN);
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -108,7 +112,6 @@ router.get('/api/flyers/:id', function(req, res) {
 	})
 })
 
-//needs to be tested
 router.get('/api/matches/:id', function(req, res) {
 	results= []
 	var my_id = req.params['id']
@@ -156,8 +159,32 @@ router.post('/api/flyer/add-acceptance', function(req, res) {
 			models.User.findOne({'_id': flyer.user}, function(err, accepted_user) {
 				models.Flyer.find({'user': user._id}, function(err, user_flyers) {
 					var sema = 0;
-					for (var i = 0; i < user_flyers.length; i++) {
+					for (var index = 0; index < user_flyers.length; index++) {
+						(function(i) {
 						if (user_flyers[i].acceptedBy.indexOf(flyer.user) != -1) {
+							client.sendMessage({
+                to:'+17039816232', 
+                from: '+12167778433',
+                body: "Congratulations " + user.name + "! You have been matched with " + flyer.user.name + "."
+               }, function(err, responseData) { //this function is executed when a response is received from Twilio
+ 
+                  if (!err) { 
+                    console.log(responseData.from); 
+                    console.log(responseData.body);
+                }
+              });
+ 
+              client.sendMessage({
+                to:'+17076926076', 
+                from: '+12167778433',
+                body: "Congratulations " + flyer.user.name + "! You have been matched with " + user.name + "."
+               }, function(err, responseData) { //this function is executed when a response is received from Twilio
+ 
+                  if (!err) { 
+                    console.log(responseData.from); 
+                    console.log(responseData.body);
+                }
+              });
 							//match!!!!
 							var match = new models.Match({flyer1: flyer, flyer2: user_flyers[i]})
 							sema ++;
@@ -168,13 +195,23 @@ router.post('/api/flyer/add-acceptance', function(req, res) {
 										accepted_user.matches.push(match)
 										accepted_user.save(function (err, au) {
 											sema--;
-											if (sema == 0) res.end('match saved');
+											if (sema == 0) {
+												res.send({match:1});
+												res.end();
+											}
 										})
 									})
 								})
-							}
 						}
-						if (sema == 0) res.end('match saved');
+						
+						
+					})(index)
+				}
+				if (sema == 0) {
+							res.send({match:0});
+							res.end();
+							//res.redirect('/matches/'+req.body.uid);
+						}
 					})
 				})
 			})

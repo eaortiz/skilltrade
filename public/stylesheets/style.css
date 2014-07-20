@@ -1,5 +1,5 @@
 body {
-	font-family: 'MuseoSansRounded';
+	font-family: 'verdana';
 	font-size: 28px;
 }
 .decor {
@@ -18,6 +18,17 @@ img {
 
 .btn {
 	padding: 30px;
+
+}
+
+.plus {
+	background: none;
+	border: none;
+	font-weight: bold;
+	color: rgb(0,166,156);
+	text-decoration: none;
+	margin-left: auto;
+	margin-right: auto;
 
 }
 

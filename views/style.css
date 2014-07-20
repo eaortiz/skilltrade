@@ -4,6 +4,12 @@
 
 }
 
+.containerDiv{
+	padding-top: 14px;
+}
+
+
+
 .header {
 
 }
@@ -13,8 +19,16 @@
 }
 
 .header ul li {
-	float:left;
+	float:right;
 	margin-left:15px;
+}
+
+#menu li {
+	cursor: pointer;
+}
+
+.signin{
+	float: right;
 }
 
 .watermark{

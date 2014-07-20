@@ -14,17 +14,21 @@
   <body>
     <div class="container">
       <div class="header pure-g">
-        <div class="watermark pure-u-1-5"></div>
+        <div class="containerDiv watermark pure-u-1-5">Skill-Trade</div>
         <div class="pure-u-4-5">
           <ul id="menu">
-            <li id="flyerfeed">Flyer Feed</li>
-            <li id="newflyer">New Flyer</li>
-            <li id="matches">Matches</li>
+            <li id="flyerfeed" onclick="window.location = 'index2.html';">Flyer Feed</li>
+            <li id="newflyer" onclick="window.location = 'manageflyers.html';">Manage Flyers</li>
+            <li id="matches" onclick="window.location = 'matches.html';">Matches</li>
           </ul>
+        </div>
       </div>
-      </div>
-      <div id="content">
-        <div id="signin">
+      <div class="content">
+        <div></div>
+        <br>
+        <br>
+        <br>
+        <div class="signin">
           <label>Please Login:</label>
           <form id="signinform" method="POST" action="/api/user/create">
             <input type="text" name="username" placeholder="Username"></input>
@@ -33,12 +37,15 @@
             <input type="submit" value="Login"></input>
           </form>
         </div>
+        <br>
+        <br>
+        <br>
         <div id="signup">
           <label>Sign Up Here:</label>
           <form id="signupform">
             <input type="text" name="fname" placeholder="First Name"></input>
             <input type="text" name="lname" placeholder="Last Name"></input>
-            <input type="text" name="description" placeholder="Write somehting about yourself"></input>
+            <input type="text" name="description" placeholder="Write something about yourself"></input>
             <input type="file" name="photoUr1"></input>
             <input type="text" name="contact" placeholder="Enter your contact information here"></input>
 

@@ -1,0 +1,45 @@
+doctype !!! 5
+html(lang='en')
+head
+  meta(charset='utf-8')
+  title Homepage | Skill-Trade
+  script(type='text/javascript', src='http://code.jquery.com/jquery-1.11.0.min.js')
+  script (type= 'text/javascript')
+    var fakedata = ["CSS","Objective C", "Java", "Salsa"];
+    function addflyer() {
+      var form = document.getElementById("newflyerform");
+      var dataString = 'want='+form.want.value+'&uid='+form.uid.value;
+      $.post(form.action, dataString, function() { alert("worked!")});
+    }
+    function populateskilllist(skills) {
+      var skilllist = document.getElementById("skilllist");
+      for (var i in skills) {
+        var tr = document.createElement("tr");
+        var td = document.createElement("td");
+        td.innerHTML = skills[i];
+        tr.appendChild(td);
+        td = document.createElement("td");
+        td.innerHTML = "del";
+        tr.appendChild(td);
+        skilllist.appendChild(tr);
+      }
+    }
+  body(onload='populateskilllist(fakedata);')
+    #container
+      #header
+        #watermark
+        select#menu
+          option(value='flyerfeed') Flyer Feed
+          option(value='newflyer') New Flyer
+          option(value='matches') Matches
+      #content
+        form#newflyerform(method='POST', action='/api/flyer/create/#{user_id}', onsubmit='addflyer(); return false;')
+          input(type='text', name='want', placeholder='What do you want to learn?')
+          input(type='hidden', name='uid')
+          input(type='submit', value='Add')
+        table
+          thead
+            tr
+              td Skill
+              td Action
+          tbody#skilllist

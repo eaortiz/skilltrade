@@ -22,23 +22,24 @@
 	var ObjectId = Schema.Types.ObjectId
 	var Model = {}
 
-	var UserSchema = new Schema({
+	var UserSchema = Schema({
 	    id          : ObjectId,
 	    name        : { type: String, required: true },
 	    description : { type: String, default: ''},
 	    photo				: { type: String, default: ''},
 	    contact			: { type: String, default: ''},
-	    flyers  : [ {type : mongoose.Schema.ObjectId, ref : 'Flyer'} ]
+	    flyers  : [ {type : mongoose.Schema.ObjectId, ref : 'Flyer'} ],
+	    matches : [ {type : mongoose.Schema.ObjectId, ref : 'Match'} ]
 	});
 
-	var FlyerSchema = new Schema({
-	    id      : ObjectId,
-	    want        : { want: String, default: '' },
-	    user       : { type: mongoose.Schema.ObjectId, ref: 'User'},
+	var FlyerSchema = Schema({
+	    id      	: ObjectId,
+	    want    	: { type: String, default: '' },
+	    user      : { type: mongoose.Schema.ObjectId, ref: 'User'},
 	    acceptedBy    : [ {type : mongoose.Schema.ObjectId, ref : 'User'} ]
 	});
 
-	var MatchSchema = new Schema({
+	var MatchSchema = Schema({
 		id 			: ObjectId,
 		learner1: {type: mongoose.Schema.ObjectId, ref: 'User'},
 		learner2: {type: mongoose.Schema.ObjectId, ref: 'User'}

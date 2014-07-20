@@ -41,8 +41,8 @@
 
 	var MatchSchema = Schema({
 		id 			: ObjectId,
-		learner1: {type: mongoose.Schema.ObjectId, ref: 'User'},
-		learner2: {type: mongoose.Schema.ObjectId, ref: 'User'}
+		flyer1: {type: mongoose.Schema.ObjectId, ref: 'Flyer'},
+		flyer2: {type: mongoose.Schema.ObjectId, ref: 'Flyer'}
 	})
 
 

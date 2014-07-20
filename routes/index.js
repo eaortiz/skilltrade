@@ -111,13 +111,36 @@ router.get('/api/matches/:id', function(req, res) {
 	res.send(matches)
 })
 
-//nees to be tested
 router.post('/api/flyer/add-acceptance', function(req, res) {
 	models.User.findOne({'_id': req.body.uid}, function(err, user) {
 		models.Flyer.findOne({'_id': req.body.id}, function(err, flyer) {
 			flyer.acceptedBy.push(user)
-			flyer.save(function (err, u) {
-			  if (err) return console.error(err)
+			flyer.save(function (err, f) {
+			if (err) return console.error(err)
+			models.User.findOne({'_id': flyer.user}, function(err, accepted_user) {
+				models.Flyer.find({'user': user._id}, function(err, user_flyers) {
+					var sema = 0;
+					for (var i = 0; i < user_flyers.length; i++) {
+						if (user_flyers[i].acceptedBy.indexOf(accepted_user) != -1) {
+							//match!!!!
+							var match = new models.Match({flyer1: flyer, flyer2: user_flyers[i]})
+							sema ++;
+							match.save(function (err, m) {
+									if (err) return console.error(err)
+									user.matches.push(match)
+									user.save(function (err, u) {
+										accepted_user.matches.push(match)
+										accepted_user.save(function (err, au) {
+											sema--;
+											if (sema == 0) res.end('match saved');
+										})
+									})
+								})
+							}
+						}
+						if (sema == 0) res.end('match saved');
+					})
+				})
 			})
 		})
 	})

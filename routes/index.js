@@ -106,9 +106,41 @@ router.get('/api/flyers/:id', function(req, res) {
 
 //needs to be tested
 router.get('/api/matches/:id', function(req, res) {
-	var user = models.User.findById(req.params['id'])
-	var match = user.matches
-	res.send(matches)
+	results= []
+	var my_id = req.params['id']
+	var results = [];
+	models.User.findOne({'_id': my_id}, function(err, user) {
+		var matches = user.matches
+		//res.send(matches)
+		if (matches.length == 0) res.send([]);
+		for (var i = 0; i < matches.length; i++) {
+			models.Match.findOne({'_id': matches[i]}, function(err, match) {
+				models.Flyer.findOne({'_id': match.flyer1}, function(err, flyer1) {
+					models.Flyer.findOne({'_id': match.flyer2}, function(err, flyer2) {
+							var mine = flyer1;
+							var yours = flyer2;
+							if (flyer2.user == req.params['id']) {
+								mine = flyer2;
+								yours = flyer1;
+							}
+							models.User.findOne({'_id': yours.user}, function(err, you) {
+								result = {
+									id: match._id,
+									their_user_id: you._id,
+									their_user_name: you.name,
+									their_user_contact: you.contact,
+									their_user_photo: you.photo,
+									their_want: yours.want,
+									my_want: mine.want
+								};
+								results.unshift(result);
+								if (results.length == matches.length) res.send(results);
+							})
+					})
+				})
+			})
+		}
+	})
 })
 
 router.post('/api/flyer/add-acceptance', function(req, res) {

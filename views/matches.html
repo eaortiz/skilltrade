@@ -23,6 +23,12 @@
         for (var i in matches) {
           var tr = document.createElement("tr");
           var td = document.createElement("td");
+          td.innerHTML = "<img src='"+matches[i].their_user_photo
+            +"' />" + matches[i].their_user_name + " will teach you " + matches[i].my_want + " in exchange for " + matches[i].their_want + ".  Contact info: " + matches[i].their_user_contact + ".";
+          tr.appendChild(td);
+          list.appendChild(tr);
+          /*var tr = document.createElement("tr");
+          var td = document.createElement("td");
           var img = document.createElement("img");
           img.src = matches[i].their_user_photo;
           td.appendChild(img);
@@ -39,7 +45,7 @@
           td = document.createElement("td");
           td.innerHTML = matches[i].their_user_contact;
           tr.appendChild(td);
-          list.appendChild(tr);
+          list.appendChild(tr);*/
         }
       }
     </script>
@@ -61,15 +67,16 @@
         <!-- <input type="button" value="Add"></input> -->
         <table width="400px">
           <thead>
-            <tr>
+            <!--<tr>
               <td>Picture</td>
               <td>Name</td>
               <td>You Learn</td>
               <td>They Learn</td>
               <td>Contact Information</td>
-            </tr>
+            </tr>-->
           </thead>
           <tbody id="matchlist">
+            <!--
             <tr>
               <td>Picture</td>
               <td>Casey</td>
@@ -77,6 +84,7 @@
               <td>Salsa</td>
               <td>707-454-0000</td>
             </tr>
+          -->
           </tbody>
         </table>
       </div>

@@ -15,7 +15,8 @@
     "mongodb": "^1.4.7",
     "morgan": "~1.0.0",
     "static-favicon": "~1.0.0",
-    "stylus": "^0.47.2"
+    "stylus": "^0.47.2",
+    "mongoose": "*"
   },
   "description": "Hello!",
   "main": "app.js",

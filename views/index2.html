@@ -5,10 +5,44 @@
 
     <title>Homepage | Skill-Trade</title>
 
-    
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <script src="jquery-1.11.1.min.js"></script>
+
+    <script type="text/javascript">
+      var uid = "53cb24f947ba0000009b1e69";
+      var offers = [];
+      function load_offers() {
+        $.get( "/api/offers/" + uid, function( data ) {
+          offers = JSON.parse(data);
+        });
+      }
+      function render_offer() {
+        if (offers.length == 0) return;
+        var offer = offers.pop();
+        document.getElementById("picture").src = offer.user.picture;
+        document.getElementById("description").innerHTML = offer.user.description;
+        var yesno = document.getElementById("yesno");
+        yesno.id = offer.id;
+        yesno.uid = offer.user.uid;
+        document.getElementById("subject").innerHTML = offer.want;
+      }
+      function offer_submit() {
+        var yesno = document.getElementById("yesno");
+        var dataString = 'id='+yesno.id.value+'&uid='+yesno.uid.value;
+        $.post(
+          yesno.action,
+          dataString,
+          function() {
+            
+          }
+        );
+        render_offer();
+      }
+    </script>
 
   </head>
-  <body>
+  <body onload="load_offers();">
     <div id="container">
       <div id="header">
         <div id="watermark"></div>
@@ -25,9 +59,11 @@
         </div>
         <div id="flyer">
           <p id="subject"></p>
-          <form id="yesno" action="/api/yesno" method="POST">
-            <input type="button" name="yes" value="Yes"></input>
-            <input type="button" name="no" value="No"></input>
+          <form id="yesno" action="/api/flyer/add-acceptance" method="POST">
+            <input type="submit" onsubmit="offer_submit(); return false;" name="yes" value="Yes"></input>
+            <input type="submit" onsubmit="render_offer(); return false;" name="no" value="No"></input>
+            <input type="hidden" name="id"></input>
+            <input type="hidden" name="uid"></input>
         </form>
         </div>
       </div>

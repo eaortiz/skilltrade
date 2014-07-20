@@ -11,6 +11,11 @@ img {
     border-radius: 50px;
 }
 
+#content {
+	width: 450px;
+	padding: 30px;
+}
+
 .btn {
 	padding: 30px;
 

@@ -7,7 +7,7 @@ var ObjectId = Schema.Types.ObjectId
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('landing')
+  res.render('landing.html')
 })
 
 router.get('/user/create', function(req, res) {
@@ -18,12 +18,12 @@ router.get('/offers/:id', function(req, res) {
 	res.render('index2.html')
 })
 
-router.get('/user/flyers', function(req, res) {
-	res.render('manageflyers.html', {user_id: '53cb24f947ba0000009b1e69'})
+router.get('/user/flyers/:id', function(req, res) {
+	res.render('manageflyers.html')
 })
 
-router.get('/matches', function(req, res) {
-	res.render('matches.html', {user_id: '53cb24f947ba0000009b1e69'})
+router.get('/matches/:id', function(req, res) {
+	res.render('matches.html')
 })
 
 router.get('/user/profile/:id', function(req, res) {
@@ -67,7 +67,7 @@ router.post('/api/flyer/create/:id', function(req, res) {
 		user.save(function (err, u) {
 		  if (err) return console.error(err)
 		})
-		res.end('flyer saved and added to user')
+		res.end()
   })
 })
 

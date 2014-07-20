@@ -162,29 +162,30 @@ router.post('/api/flyer/add-acceptance', function(req, res) {
 					for (var index = 0; index < user_flyers.length; index++) {
 						(function(i) {
 						if (user_flyers[i].acceptedBy.indexOf(flyer.user) != -1) {
+							
 							client.sendMessage({
                 to:'+17039816232', 
                 from: '+12167778433',
-                body: "Congratulations " + user.name + "! You have been matched with " + flyer.user.name + "."
+                body: "Congratulations " + user.name + "! You have been matched with " + accepted_user.name +
+                 		". You would be learning " + user_flyers[i].want + " while teaching " + flyer.want + ". Contact "  + accepted_user.name + ": " + accepted_user.contact 
                }, function(err, responseData) { //this function is executed when a response is received from Twilio
- 
                   if (!err) { 
                     console.log(responseData.from); 
                     console.log(responseData.body);
                 }
               });
- 
               client.sendMessage({
-                to:'+17076926076', 
+                to:'+17876926076', 
                 from: '+12167778433',
-                body: "Congratulations " + flyer.user.name + "! You have been matched with " + user.name + "."
+                body: "Congratulations " + accepted_user.name + "! You have been matched with " + user.name +
+                 		". You would be learning " + flyer.want  + " while teaching " + user_flyers[i].want + ". Contact "  + user.name + ": " + user.contact 
                }, function(err, responseData) { //this function is executed when a response is received from Twilio
- 
                   if (!err) { 
                     console.log(responseData.from); 
                     console.log(responseData.body);
                 }
               });
+ 
 							//match!!!!
 							var match = new models.Match({flyer1: flyer, flyer2: user_flyers[i]})
 							sema ++;

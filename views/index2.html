@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var offers = [];
       function load_offers() {
-        uid = window.location.substring(window.location.lastIndexOf('/') + 1);
+        uid = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
         $.get( "/api/offers/" + uid, function( data ) {
           offers = data;
           render_offer();

@@ -12,7 +12,7 @@
 
     <script type="text/javascript">
       function getmatches(cb) {
-        uid = window.location.substring(window.location.lastIndexOf('/') + 1);
+        uid = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
         $.get( "/api/matches/" + uid, function( data ) {
           cb(data);
         });

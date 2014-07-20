@@ -22,6 +22,10 @@ router.get('/user/flyers', function(req, res) {
 	res.render('manageflyers.html', {user_id: '53cb24f947ba0000009b1e69'})
 })
 
+router.get('/matches', function(req, res) {
+	res.render('matches.html', {user_id: '53cb24f947ba0000009b1e69'})
+})
+
 router.get('/user/profile/:id', function(req, res) {
 	var id_string = req.params.id
   models.User.findOne({'_id': id_string}, function(err, user) {

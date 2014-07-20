@@ -8,10 +8,44 @@
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <link rel="stylesheet" href="style.css">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
+    <script type="text/javascript">
+      var uid = "53cb9cff0d26d7b5933c6d11";
+      function getmatches(cb) {
+        $.get( "/api/matches/" + uid, function( data ) {
+          cb(data);
+        });
+      }
+      function populatelist(matches) {
+        var list = document.getElementById("matchlist");
+        list.innerHTML = "";
+        for (var i in matches) {
+          var tr = document.createElement("tr");
+          var td = document.createElement("td");
+          var img = document.createElement("img");
+          img.src = matches[i].their_user_photo;
+          td.appendChild(img);
+          tr.appendChild(td);
+          td = document.createElement("td");
+          td.innerHTML = matches[i].their_user_name;
+          tr.appendChild(td);
+          td = document.createElement("td");
+          td.innerHTML = matches[i].my_want;
+          tr.appendChild(td);
+          td = document.createElement("td");
+          td.innerHTML = matches[i].their_want;
+          tr.appendChild(td);
+          td = document.createElement("td");
+          td.innerHTML = matches[i].their_user_contact;
+          tr.appendChild(td);
+          list.appendChild(tr);
+        }
+      }
+    </script>
     
   </head>
-  <body>
+  <body onload="getmatches(populatelist);">
     <div class="container">
       <div class="header pure-g">
         <div class="containerDiv watermark pure-u-1-5">Skill-Trade</div>
@@ -29,12 +63,13 @@
           <thead>
             <tr>
               <td>Picture</td>
+              <td>Name</td>
               <td>You Learn</td>
               <td>They Learn</td>
               <td>Contact Information</td>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="matchlist">
 
           </tbody>
         </table>

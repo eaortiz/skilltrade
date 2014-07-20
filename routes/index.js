@@ -14,6 +14,10 @@ router.get('/user/create', function(req, res) {
 	res.render('create_user')
 })
 
+router.get('/offers/:id', function(req, res) {
+	res.render('index2.html')
+})
+
 router.get('/user/flyers', function(req, res) {
 	res.render('manageflyers.html', {user_id: '53cb24f947ba0000009b1e69'})
 })
@@ -109,11 +113,13 @@ router.get('/api/matches/:id', function(req, res) {
 
 //nees to be tested
 router.post('/api/flyer/add-acceptance', function(req, res) {
-	var user = models.User.findById(req.body.userId)
-	var flyer = models.Flyer.findById(req.body.flyerId)
-	flyer.acceptedBy.push(user)
-	flyer.save(function (err, u) {
-	  if (err) return console.error(err)
+	models.User.findOne({'_id': req.body.uid}, function(err, user) {
+		models.Flyer.findOne({'_id': req.body.id}, function(err, flyer) {
+			flyer.acceptedBy.push(user)
+			flyer.save(function (err, u) {
+			  if (err) return console.error(err)
+			})
+		})
 	})
 })
 

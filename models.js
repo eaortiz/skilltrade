@@ -1,17 +1,18 @@
 (function() {
-	// for heroku
-	// var mongoUri = process.env.MONGOLAB_URI ||
-	//   process.env.MONGOHQ_URL ||
-	//   'mongodb://localhost/mydb';
+	for heroku
+	var mongoUri = process.env.MONGOLAB_URI ||
+	  process.env.MONGOHQ_URL ||
+	  'mongodb://localhost/mydb';
 
-	// mongo.Db.connect(mongoUri, function (err, db) {
-	//   db.collection('user', function(er, collection) {
-	//     collection.insert({'mykey': 'myvalue'}, {safe: true}, function(er,rs) {
-	//     });
-	//   });
-	// });
+	mongo.Db.connect(mongoUri, function (err, db) {
+	  db.collection('user', function(er, collection) {
+	    collection.insert({'mykey': 'myvalue'}, {safe: true}, function(er,rs) {
+	    });
+	  });
+	});
 	var mongoose = require('mongoose');
-	mongoose.connect('mongodb://localhost/test');
+	//mongoose.connect('mongodb://localhost/test');
+	mongoose.connect(mongoUri)
 	var db = mongoose.connection;
 	db.on('error', console.error.bind(console, 'connection error:'));
 	db.once('open', function callback () {

@@ -10,22 +10,10 @@ var users = require('./routes/users');
 
 var app = express();
 
-var mongo = require('mongodb');
-
-var mongoUri = process.env.MONGOLAB_URI ||
-  process.env.MONGOHQ_URL ||
-  'mongodb://localhost/mydb';
-
-mongo.Db.connect(mongoUri, function (err, db) {
-  db.collection('user', function(er, collection) {
-    collection.insert({'mykey': 'myvalue'}, {safe: true}, function(er,rs) {
-    });
-  });
-});
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.engine('html', require('ejs').renderFile);
 
 app.use(favicon());
 app.use(logger('dev'));

@@ -5,7 +5,7 @@
 
     <title>Homepage | Skill-Trade</title>
 
-    <script src="jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script>
       var fakedata = ["CSS","Objective C", "Java", "Salsa"];
       function addflyer() {
@@ -45,7 +45,7 @@
         </select>
       </div>
       <div id="content">
-        <form method="POST" action="/api/flyer/create" id="newflyerform" onsubmit="addflyer(); return false;">
+        <form method="POST" action="/api/flyer/create/<%=user_id%>" id="newflyerform" onsubmit="addflyer(); return false;">
           <input type="text" name="want" placeholder="What do you want to learn?"></input>
           <input type="hidden" name="uid"></input>
           <input type="submit" value="Add"></input>

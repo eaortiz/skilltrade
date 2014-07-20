@@ -1,5 +1,5 @@
 html
-	body
+  body
 		form(method="POST", action="/api/user/create")
 			p Name:
 			input(type="text", name="name")
@@ -8,7 +8,8 @@ html
 			input(type="text", name="description")
 			br
 			p Picture:
-			input(type="file", name="picture")
+			input(type="file", name="photoUrl")
 			br
 			p Contact Information:
-			input(type="text", name="contact_info")
+			input(type="text", name="contactInfo")
+			input(type = "submit", value = "Start Learning")

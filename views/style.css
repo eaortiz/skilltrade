@@ -23,6 +23,10 @@
 	margin-left:15px;
 }
 
+#menu li {
+	cursor: pointer;
+}
+
 .signin{
 	float: right;
 }

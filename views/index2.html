@@ -7,13 +7,10 @@
 
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
-<<<<<<< HEAD
     <link rel="stylesheet" href="style.css">
 
     <script src="jquery-1.11.1.min.js"></script>
-=======
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
->>>>>>> 387f814ddced5ed8dabac2cd34bb021e9c010901
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
     <script type="text/javascript">
       var uid = "53cb24f947ba0000009b1e69";
@@ -52,13 +49,14 @@
   <body onload="load_offers();">
     <div class="container">
       <div class="header pure-g">
-        <div class="containerDiv watermark pure-u-1-5"></div>
+        <div class="containerDiv watermark pure-u-1-5">Skill-Trade</div>
         <div class="pure-u-4-5">
           <ul id="menu">
-            <li id="flyerfeed">Flyer Feed</li>
-            <li id="newflyer">New Flyer</li>
-            <li id="matches">Matches</li>
+            <li id="flyerfeed" onclick="window.location = 'index2.html';">Flyer Feed</li>
+            <li id="newflyer" onclick="window.location = 'manageflyers.html';">Manage Flyers</li>
+            <li id="matches" onclick="window.location = 'matches.html';">Matches</li>
           </ul>
+        </div>
       </div>
       </div>
       <div id="content">

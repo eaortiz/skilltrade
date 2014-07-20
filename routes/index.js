@@ -121,7 +121,7 @@ router.post('/api/flyer/add-acceptance', function(req, res) {
 				models.Flyer.find({'user': user._id}, function(err, user_flyers) {
 					var sema = 0;
 					for (var i = 0; i < user_flyers.length; i++) {
-						if (user_flyers[i].acceptedBy.indexOf(accepted_user) != -1) {
+						if (user_flyers[i].acceptedBy.indexOf(flyer.user) != -1) {
 							//match!!!!
 							var match = new models.Match({flyer1: flyer, flyer2: user_flyers[i]})
 							sema ++;
@@ -153,18 +153,19 @@ router.get('/api/offers/:id', function(req, res) {
 	models.Flyer.find({}, function(err, flyers) {
 		var results = []
 		for (var i = 0; i < flyers.length; i++) {
-			var flyer = flyers[i]
-			models.User.findOne({'_id': flyer.user}, function(err, user) {
-				results.push({
-					id: flyer._id,
-					user_id: user._id,
-					user_name: user.name,
-					user_description: user.description,
-					user_photo: user.photo,
-					want: flyer.want
+			(function (flyer) {
+				models.User.findOne({'_id': flyer.user}, function(err, user) {
+					results.push({
+						id: flyer._id,
+						user_id: user._id,
+						user_name: user.name,
+						user_description: user.description,
+						user_photo: user.photo,
+						want: flyer.want
+					})
+					if (results.length == flyers.length) res.send(results)
 				})
-				if (results.length == flyers.length) res.send(results)
-			})
+			})(flyers[i]);
 		}
 	})
 })

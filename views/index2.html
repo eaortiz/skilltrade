@@ -9,11 +9,10 @@
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <link rel="stylesheet" href="style.css">
 
-    <script src="jquery-1.11.1.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
     <script type="text/javascript">
-      var uid = "53cb24f947ba0000009b1e69";
+      var uid = "53cb9cff0d26d7b5933c6d11";
       var offers = [];
       function load_offers() {
         $.get( "/api/offers/" + uid, function( data ) {
@@ -23,12 +22,16 @@
       }
       function render_offer() {
         if (offers.length == 0) alert("no more flyers!");
-        var offer = offers.pop();
+        var offer;
+        do {
+          offer = offers.pop();
+        } while (offer.user_id == uid);
         document.getElementById("picture").src = offer.user_photo;
         document.getElementById("description").innerHTML = offer.user_description;
+        document.getElementById("user_name").innerHTML = offer.user_name;
         var yesno = document.getElementById("yesno");
         yesno.id.value = offer.id;
-        yesno.uid.value = offer.user_id;
+        yesno.uid.value = uid;
         document.getElementById("subject").innerHTML = offer.want;
       }
       function offer_submit() {
@@ -61,6 +64,7 @@
       <div id="content">
         <div id="profile">
           <img id="picture" />
+          <p id="user_name"></p>
           <p id="description"></p>
         </div>
         <div id="flyer">

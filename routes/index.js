@@ -19,16 +19,16 @@ router.get('/user/flyers', function(req, res) {
 })
 
 router.get('/user/profile/:id', function(req, res) {
-  //var id_string = req.params.id.toString()
-  //console.log(id_string)
-  //var user = models.User.find({'id': id_string})
-  var user = models.User.findById(Integer.parseInt(req.params.id))
-  var data = {"name": user.name,
-              "description": user.description,
-              "picture": user.photo,
-              "contact_info": user.contact
-              }
-  res.send(data)
+	var id_string = req.params.id
+  models.User.findOne({'_id': id_string}, function(err, user) {
+		if (err) return console.error(err)
+	  var data = {"name": user.name,
+	              "description": user.description,
+	              "picture": user.photo,
+	              "contact_info": user.contact
+	              }
+	  res.send(data)
+	})
 })
 
 router.post('/api/user/create', function(req, res) {
@@ -47,17 +47,13 @@ router.post('/api/user/create', function(req, res) {
 })
 
 router.post('/api/flyer/create/:id', function(req, res) {
-	console.log('want' + req.body.want)
 	var id_string = req.params.id
-  console.log('idstring: ' + id_string)
-  models.User.findOne({'_id': id_string}, function(err, user) {//id_string)}, function(err, users){
+  models.User.findOne({'_id': id_string}, function(err, user) {
    	if (err) return console.error(err)
    	var want = (req.body.want).toString()
 		var flyer = new models.Flyer({user: user, want: want})
 		flyer.save(function (err, f) {
 		  if (err) return console.error(err)
-		  console.log(want)
-		  console.log('flya' + f)
 		})
 		user.flyers.push(flyer)
 		user.save(function (err, u) {
@@ -67,8 +63,9 @@ router.post('/api/flyer/create/:id', function(req, res) {
   })
 })
 
+//needs to be tested
 router.post('/api/match/create', function(req, res) {
-	var flyer1 = models.Flyer.findById(req.body.flyerId1)
+	var flyer1 = models.Flyer.sync.findOne(req.body.flyerId1)
 	var flyer2 = models.Flyer.findById(req.body.flyerId2)
 	var match = new models.Match({flyer1: flyer1, flyer2: flyer2})
 	var user1 = models.User.findById(flyer1.user.id)
@@ -83,17 +80,30 @@ router.post('/api/match/create', function(req, res) {
 })
 
 router.get('/api/flyers/:id', function(req, res) {
-	var user = models.User.findById(req.params['id'])
-	var flyers = user.flyers
-	res.send(flyers)
+	models.User.findById(req.params['id'], function(err, user) {
+		var flyers = user.flyers
+		console.log('flyers: ' + flyers)
+		var results = []
+		for (var i = 0; i < flyers.length; i++) {
+			var index = flyers[i]
+			models.Flyer.findOne({'_id': index}, function(err, flyer) {
+				if (err) return console.error(err)
+				console.log(flyer)
+				results.push(flyer.want)
+				if (results.length == flyers.length) res.send(results)
+			})
+		}
+	})
 })
 
+//needs to be tested
 router.get('/api/matches/:id', function(req, res) {
 	var user = models.User.findById(req.params['id'])
 	var match = user.matches
 	res.send(matches)
 })
 
+//nees to be tested
 router.post('/api/flyer/add-acceptance', function(req, res) {
 	var user = models.User.findById(req.body.userId)
 	var flyer = models.Flyer.findById(req.body.flyerId)
@@ -103,6 +113,7 @@ router.post('/api/flyer/add-acceptance', function(req, res) {
 	})
 })
 
+//needs to be tested
 router.get('/api/offers/:id', function(req, res) {
 	//get potential matches
 	//show the ones with most match potential first
